@@ -15,6 +15,7 @@ namespace SpartaDungeon
             Item[] playerEquipped = new Item[] { itemData.GetItemFromCode("1") };
             Character player = new Character("Chad", "전사", 1, 10, 5, 100, 1500, playerInventory, playerEquipped);
             StatusScene statusScene = new StatusScene(player);
+            InventoryScene inventoryScene = new InventoryScene(player);
             string sceneChoice = "StartScene";
             bool isGameOver = false;
 
@@ -36,6 +37,9 @@ namespace SpartaDungeon
                         break;
                     case "StatusScene":
                         sceneChoice = statusScene.Display();
+                        break;
+                    case "InventoryScene":
+                        sceneChoice = inventoryScene.Display();
                         break;
                     case "Escape":
                         isGameOver = true;

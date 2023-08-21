@@ -32,12 +32,39 @@ namespace SpartaDungeon
         public int Atk { get; set; }
         public int Def { get; set; }
         public int HP { get; set; }
+
+        public override string ToString()
+        {
+            string stats = "";
+            if (this.Atk != 0)
+            {
+                if (this.Atk > 0)
+                    stats += $"공격력 +{this.Atk} ";
+                else
+                    stats += $"공격력 {this.Atk} ";
+            }
+            if (this.Def != 0)
+            {
+                if (this.Def > 0)
+                    stats += $"방어력 +{this.Def} ";
+                else
+                    stats += $"방어력 {this.Def} ";
+            }
+            if (this.HP != 0)
+            {
+                if (this.HP > 0)
+                    stats += $"체  력 +{this.HP} ";
+                else
+                    stats += $"체  력 {this.HP} ";
+            }
+            return stats;
+        }
     }
 
     internal class ItemData
     {
 
-        public static JArray? jsonItemArray; 
+        public static JArray? jsonItemArray;
 
         public ItemData()
         {
@@ -61,43 +88,5 @@ namespace SpartaDungeon
             }
             return item;
         }
-
-        
-        //public Item (string code)
-        //{
-        //    foreach (JObject itemData in jsonItemArray)
-        //    {
-        //        string codeInJson = itemData["Code"].ToString();
-        //        if(codeInJson == code)
-        //        {
-        //            Code = itemData["Code"].ToString();
-        //            Name = itemData["Name"].ToString();
-        //            Info = itemData["Info"].ToString();
-        //            Stats = new ItemStats() { Atk = (int)itemData["Stats"]["Atk"], Def = (int)itemData["Stats"]["Def"], HP = (int)itemData["Stats"]["HP"] };
-        //        }
-
-        //    }
-        //    //Code = code;
-        //    //Name = "무슨 창";
-        //    //Info = "임시로 만든거라 평범한 창";
-        //    //Stats = new ItemStats () { Atk = 1, Def = 1, HP = 1 };
-
-        //}
-
     }
-
-    //class Weapon : Item
-    //{
-    //    public Weapon(string code) : base(code)
-    //    {
-    //    }
-    //}
-
-    //class Armor : Item
-    //{
-    //    public Armor(string code) : base(code)
-    //    {
-    //    }
-
-    //}
 }

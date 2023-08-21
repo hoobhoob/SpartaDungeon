@@ -26,14 +26,19 @@ namespace SpartaDungeon
 
         public override void DisplayMain()
         {
-            Console.WriteLine();
-            Console.WriteLine($"[아이템 목록]");
-            Console.Write("- ");
-            Console.WriteLine($"{player.Name} ( {player.Job} )");
-            Console.WriteLine($"공격력 : {player.Atk}");
-            Console.WriteLine($"방어력 : {player.Def}");
-            Console.WriteLine($"체  력 : {player.Hp}");
-            Console.WriteLine($"Gold   : {player.Gold}");
+            Console.WriteLine($"\n[아이템 목록]\n");
+
+            foreach (Item item in player.EquippedItems)
+            {
+                Console.WriteLine($"- [E] {item.Name, -15} | {item.Stats.ToString(), -30} | {item.Info}");
+            }
+            foreach (Item item in player.Invertory)
+            {
+                if (!player.EquippedItems.Contains(item))
+                {
+                    Console.WriteLine($"-    {item.Name, -15} | {item.Stats.ToString(), -30} | {item.Info}");
+                }
+            }
         }
     }
 }

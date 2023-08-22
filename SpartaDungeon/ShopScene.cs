@@ -17,18 +17,19 @@ namespace SpartaDungeon
 
         public override void DisplayTitle()
         {
-            Console.WriteLine("상점");
-            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+            fontColorChange.WriteLine(ConsoleColor.Cyan, "\n상점");
+            Console.WriteLine("\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
 
         }
 
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[보유 골드]");
-            Console.WriteLine($"{_player.Gold} G");
-            Console.WriteLine($"\n[아이템 목록]\n");
+            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            Console.WriteLine(" G");
+            Console.WriteLine("\n[아이템 목록]\n");
             int x = 25;
-            int y = 8;
+            int y = 11;
             foreach (Item item in _items)
             {
                 int count = 0;
@@ -39,19 +40,22 @@ namespace SpartaDungeon
                 if (item.Stats.Atk != 0)
                 {
                     Console.SetCursorPosition(x, y);
-                    Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
+                    Console.Write(" | 공격력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.Atk.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.Def != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
-                    Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
+                    Console.Write(" | 방어력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.Def.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.HP != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
-                    Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
+                    Console.Write(" | 체  력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.HP.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
@@ -62,11 +66,15 @@ namespace SpartaDungeon
                 Console.SetCursorPosition(x + 20, oldY);
                 if (_player.Invertory.Contains(item))
                 {
-                    Console.WriteLine($" | 구매완료");
+                    Console.Write(" | ");
+                    fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");
                 }
                 else
                 {
-                    Console.WriteLine($" | {item.Price()} G");
+                    Console.Write(" | ");
+                    fontColorChange.Write(ConsoleColor.Green, $"{item.Price()}");
+                    Console.WriteLine(" G");
+
                 }
                 y += count;
                 Console.SetCursorPosition(0, y);

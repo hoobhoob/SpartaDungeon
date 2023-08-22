@@ -13,8 +13,8 @@ namespace SpartaDungeon
 
         public override void DisplayTitle()
         {
-            Console.WriteLine("상태 보기");
-            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+            fontColorChange.WriteLine(ConsoleColor.Cyan, "\n상태 보기");
+            Console.WriteLine("\n캐릭터의 정보가 표시됩니다.\n");
         }
 
         public override void DisplayMain()
@@ -24,29 +24,49 @@ namespace SpartaDungeon
 
             _player.GetEquippedItemsStats(out itemStats[0], out itemStats[1], out itemStats[2]);
 
-            for (int i = 0; i < itemStats.Length; i++) 
-            {
-                if (itemStats[i] > 0)
-                {
-                    itemStatsString[i] = $"(+{itemStats[i]})";
-                }
-                else if (itemStats[i] < 0)
-                {
-                    itemStatsString[i] = $"({itemStats[i]})";
-                }
-                else
-                {
-                    itemStatsString[i] = "";
-                }
-            }
-
             Console.WriteLine();
-            Console.WriteLine($"Lv. {_player.Level}");
+            Console.Write("Lv. ");
+            fontColorChange.WriteLine(ConsoleColor.Green, $"{_player.Level}");
             Console.WriteLine($"{_player.Name} ( {_player.Job} )");
-            Console.WriteLine($"공격력 : {_player.Atk + itemStats[0]} {itemStatsString[0]}");
-            Console.WriteLine($"방어력 : {_player.Def + itemStats[1]} {itemStatsString[1]}");
-            Console.WriteLine($"체  력 : {_player.Hp + itemStats[2]} {itemStatsString[2]}");
-            Console.WriteLine($"Gold   : {_player.Gold}");
+            if (itemStats[0] != 0)
+            {
+                Console.Write("공격력 : ");
+                fontColorChange.Write(ConsoleColor.Magenta, $"{_player.Atk + itemStats[0]} ");
+                Console.Write("(");
+                fontColorChange.Write(ConsoleColor.Magenta, itemStats[0].ToString("+#; -#"));
+                Console.WriteLine(")");
+            }
+            else
+            {
+                Console.WriteLine($"공격력 : {_player.Atk}");
+            }
+            if (itemStats[1] != 0)
+            {
+                Console.Write("방어력 : ");
+                fontColorChange.Write(ConsoleColor.Magenta, $"{_player.Def + itemStats[1]} ");
+                Console.Write("(");
+                fontColorChange.Write(ConsoleColor.Magenta, itemStats[1].ToString("+#; -#"));
+                Console.WriteLine(")");
+            }
+            else
+            {
+                Console.WriteLine($"방어력 : {_player.Def}");
+            }
+            if (itemStats[2] != 0)
+            {
+                Console.Write("체  력 : ");
+                fontColorChange.Write(ConsoleColor.Magenta, $"{_player.Hp + itemStats[2]} ");
+                Console.Write("(");
+                fontColorChange.Write(ConsoleColor.Magenta, itemStats[2].ToString("+#; -#"));
+                Console.WriteLine(")");
+            }
+            else
+            {
+                Console.WriteLine($"체  력 : {_player.Hp}");
+            }
+            Console.Write("Gold   : ");
+            fontColorChange.WriteLine(ConsoleColor.Yellow, $"{_player.Gold}");
+
         }
     }
 }

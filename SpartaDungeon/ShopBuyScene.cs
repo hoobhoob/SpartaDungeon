@@ -16,42 +16,49 @@ namespace SpartaDungeon
         }
         public override void DisplayTitle()
         {
-            Console.WriteLine("상점 - 아이템 구매");
-            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
-
+            fontColorChange.Write(ConsoleColor.Cyan, "\n상점");
+            Console.Write(" - ");
+            fontColorChange.WriteLine(ConsoleColor.Yellow, "아이템 구매");
+            Console.WriteLine("\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
         }
 
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[보유 골드]");
-            Console.WriteLine($"{_player.Gold} G");
+            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            Console.WriteLine(" G");
             Console.WriteLine($"\n[아이템 목록]\n");
             int i = 1;
             int x = 25;
-            int y = 8;
+            int y = 11;
             foreach (Item item in _items)
             {
                 int count = 0;
                 int oldY = y;
-                Console.Write($"- {i,2}  {item.Name}");
+                Console.Write("- ");
+                fontColorChange.Write(ConsoleColor.Magenta, $"{i,2} ");
+                Console.Write($" {item.Name}");
                 Console.SetCursorPosition(x + 35, y);
                 Console.Write($" | {item.Info}");
                 if (item.Stats.Atk != 0)
                 {
                     Console.SetCursorPosition(x, y);
-                    Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
+                    Console.Write(" | 공격력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.Atk.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.Def != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
-                    Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
+                    Console.Write(" | 방어력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.Def.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.HP != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
-                    Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
+                    Console.Write(" | 체  력 ");
+                    fontColorChange.WriteLine(ConsoleColor.Magenta, $"{item.Stats.HP.ToString("+#;-#")}");
                     count++;
                 }
                 if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
@@ -62,11 +69,14 @@ namespace SpartaDungeon
                 Console.SetCursorPosition(x + 20, oldY);
                 if (_player.Invertory.Contains(item))
                 {
-                    Console.WriteLine($" | 구매완료");
+                    Console.Write(" | ");
+                    fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");
                 }
                 else
                 {
-                    Console.WriteLine($" | {item.Price()} G");
+                    Console.Write(" | ");
+                    fontColorChange.Write(ConsoleColor.Green, $"{item.Price()}");
+                    Console.WriteLine(" G");
                 }
                 i++;
                 y += count;
@@ -112,16 +122,20 @@ namespace SpartaDungeon
                 switch (errNumber)
                 {
                     case 0:
-                        Console.WriteLine("\n잘못된 입력입니다.\n");
+                        fontColorChange.BackgroundWriteLine(ConsoleColor.DarkRed, "\n잘못된 입력입니다.");
+                        Console.WriteLine();
                         break;
                     case 1:
-                        Console.WriteLine("\n이미 구매한 아이템입니다.\n");
+                        fontColorChange.BackgroundWriteLine(ConsoleColor.DarkGreen, "\n이미 구매한 아이템입니다.");
+                        Console.WriteLine();
                         break;
                     case 2:
-                        Console.WriteLine("\nGold 가 부족합니다.\n");
+                        fontColorChange.BackgroundWriteLine(ConsoleColor.DarkYellow, "\nGold 가 부족합니다.");
+                        Console.WriteLine();
                         break;
                     default:
-                        Console.WriteLine("\n잘못된 입력입니다.\n");
+                        fontColorChange.BackgroundWriteLine(ConsoleColor.DarkRed, "\n잘못된 입력입니다.");
+                        Console.WriteLine();
                         break;
                 }
             }

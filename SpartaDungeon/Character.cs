@@ -86,6 +86,8 @@ namespace SpartaDungeon
         public void LevelUp()
         {
             Level++;
+            Atk++;
+            Def++;
         }
 
         public void GetEquippedItemsStats(out int totalatk, out int totaldef, out int totalhp)

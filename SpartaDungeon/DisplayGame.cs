@@ -6,6 +6,7 @@ namespace SpartaDungeon
     {
         public string[]? buttons;
         public string[]? buttonsName;
+        protected FontColorChange fontColorChange = new FontColorChange();
 
         public abstract void DisplayTitle();
 
@@ -18,7 +19,8 @@ namespace SpartaDungeon
             {
                 for (int i = 0; i < buttonsName.Length; i++)
                 {
-                    Console.WriteLine($"{i}. {buttonsName[i]}");
+                    fontColorChange.Write(ConsoleColor.Magenta, $"{i}");
+                    Console.WriteLine($". {buttonsName[i]}");
                 }
             }
             else
@@ -42,7 +44,8 @@ namespace SpartaDungeon
                         return buttons[number];
                     }
                 }
-                Console.WriteLine("잘못된 입력입니다.");
+                fontColorChange.BackgroundWriteLine(ConsoleColor.DarkRed, "\n잘못된 입력입니다.");
+                Console.WriteLine();
             }
             return "StartScene";
         }

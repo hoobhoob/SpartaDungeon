@@ -25,7 +25,6 @@ namespace SpartaDungeon
             //JArray jsonArray = new JArray() { job1, job2 };
             //File.WriteAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json", jsonArray.ToString());
 
-
             while (!isGameOver)
             {
                 switch (sceneChoice)

@@ -11,11 +11,12 @@ namespace SpartaDungeon
         {
             ItemData itemData = new ItemData();
             StartScene startScene = new StartScene();
-            Item[] playerInventory = new Item[] { itemData.GetItemFromCode("1"), itemData.GetItemFromCode("2") };
-            Item[] playerEquipped = new Item[] { itemData.GetItemFromCode("1") };
+            List<Item> playerInventory = new List<Item> { itemData.GetItemFromCode("1"), itemData.GetItemFromCode("2") };
+            List<Item> playerEquipped = new List<Item> { itemData.GetItemFromCode("1") };
             Character player = new Character("Chad", "전사", 1, 10, 5, 100, 1500, playerInventory, playerEquipped);
             StatusScene statusScene = new StatusScene(player);
             InventoryScene inventoryScene = new InventoryScene(player);
+            InventoryManager inventoryManager = new InventoryManager(player);
             string sceneChoice = "StartScene";
             bool isGameOver = false;
 
@@ -40,6 +41,9 @@ namespace SpartaDungeon
                         break;
                     case "InventoryScene":
                         sceneChoice = inventoryScene.Display();
+                        break;
+                    case "InventoryManager":
+                        sceneChoice = inventoryManager.Display();
                         break;
                     case "Escape":
                         isGameOver = true;

@@ -29,6 +29,7 @@ namespace SpartaDungeon
         {
             Console.WriteLine($"\n[아이템 목록]\n");
             int i = 1;
+            _equipItems.Clear();
             foreach (Item item in player.EquippedItems)
             {
                 Console.WriteLine($"- {i,2} [E] {item.Name,-15} | {item.Stats.ToString(),-30} | {item.Info}");
@@ -56,23 +57,27 @@ namespace SpartaDungeon
                 string? choice = Console.ReadLine();
                 if (choice != null && int.TryParse(choice, out int number))
                 {
-                    //if (number >= 0 && number < buttons.Length)
-                    //{
-                    //    return buttons[number];
-                    //}
                     if (number == 0)
                     {
                         return buttons[0];
                     }
                     else if (number <= _equipItems.Count)
                     {
-
                         return buttons[1];
                     }
                 }
                 Console.WriteLine("잘못된 입력입니다.");
             }
-            return "NoChoice";
+            return "StartScene";
+        }
+
+        public new string Display()
+        {
+            Console.Clear();
+            DisplayTitle();
+            DisplayMain();
+            DisplayChoice();
+            return DIsplayReadNumber();
         }
     }
 }

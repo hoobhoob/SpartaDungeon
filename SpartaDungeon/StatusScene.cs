@@ -65,8 +65,8 @@ namespace SpartaDungeon
                 Console.WriteLine($"체  력 : {_player.Hp}");
             }
             Console.Write("Gold   : ");
-            fontColorChange.WriteLine(ConsoleColor.Yellow, $"{_player.Gold}");
-
+            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            Console.WriteLine(" G");
         }
     }
 }

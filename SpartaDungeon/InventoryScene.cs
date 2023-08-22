@@ -14,7 +14,7 @@ namespace SpartaDungeon
         public InventoryScene(Character player)
         {
             buttons = new string[] { "StartScene", "InventoryManager" };
-            buttonsName = new string[] { "나가기", "장착 관리"};
+            buttonsName = new string[] { "나가기", "장착 관리" };
             this.player = player;
         }
 
@@ -30,34 +30,67 @@ namespace SpartaDungeon
             int y = 5;
             foreach (Item item in player.EquippedItems)
             {
+                int count = 0;
                 Console.Write($"- [E] {item.Name}");
-                Console.SetCursorPosition(20, y);
-                Console.Write(" | " + item.Stats.ToString());
-                Console.SetCursorPosition(50, y);
-                Console.WriteLine(" | " + item.Info);
-                y++;
-
+                Console.SetCursorPosition(40, y);
+                Console.Write($" | {item.Info}");
+                if (item.Stats.Atk != 0)
+                {
+                    Console.SetCursorPosition(20, y);
+                    Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
+                    count++;
+                }
+                if (item.Stats.Def != 0)
+                {
+                    Console.SetCursorPosition(20, y + count);
+                    Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
+                    count++;
+                }
+                if (item.Stats.HP != 0)
+                {
+                    Console.SetCursorPosition(20, y + count);
+                    Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
+                    count++;
+                }
+                if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
+                {
+                    Console.SetCursorPosition(20, y);
+                    Console.WriteLine(" | ");
+                }
+                y += count;
             }
             foreach (Item item in player.Invertory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {
+                    int count = 0;
                     Console.Write($"-     {item.Name}");
-                    Console.SetCursorPosition(20, y);
-                    Console.Write(" | " + item.Stats.ToString());
-                    Console.SetCursorPosition(50, y);
-                    Console.WriteLine(" | " + item.Info);
-                    y++;
-                    //int oldY= y;
-                    //Console.Write($"-     {item.Name}");
-                    //Console.SetCursorPosition(20, y);
-                    //if
-                    //{
-
-                    //}
-                    //Console.SetCursorPosition(50, oldY);
-                    //Console.Write(" | " + item.Info);
-
+                    Console.SetCursorPosition(40, y);
+                    Console.Write($" | {item.Info}");
+                    if (item.Stats.Atk != 0)
+                    {
+                        Console.SetCursorPosition(20, y);
+                        Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if (item.Stats.Def != 0)
+                    {
+                        Console.SetCursorPosition(20, y + count);
+                        Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if (item.Stats.HP != 0)
+                    {
+                        Console.SetCursorPosition(20, y + count);
+                        Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if(item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
+                    {
+                        Console.SetCursorPosition(20, y);
+                        Console.WriteLine(" | ");
+                    }
+                    y += count;
                 }
             }
         }

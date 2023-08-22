@@ -56,6 +56,7 @@ namespace SpartaDungeon
                     item.Code = itemData["Code"].ToString();
                     item.Name = itemData["Name"].ToString();
                     item.Info = itemData["Info"].ToString();
+                    item.Type = itemData["Type"].ToString();
                     item.Stats = new ItemStats() { Atk = (int)itemData["Stats"]["Atk"], Def = (int)itemData["Stats"]["Def"], HP = (int)itemData["Stats"]["HP"] };
                     break;
                 }

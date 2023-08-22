@@ -47,7 +47,7 @@ namespace SpartaDungeon
                         return buttons[number];
                     }
                 }
-                Console.WriteLine("잘못된 입력입니다. DisplayGames.cs");
+                Console.WriteLine("잘못된 입력입니다.");
             }
             return "StartScene";
         }

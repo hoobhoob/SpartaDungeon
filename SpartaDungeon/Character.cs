@@ -39,6 +39,14 @@ namespace SpartaDungeon
             {
                 if(!EquippedItems.Contains(item))
                 {
+                    for (int i = 0;  i < EquippedItems.Count; i++)
+                    {
+                        if (EquippedItems[i].Type == item.Type)
+                        {
+                            UnEquipItem(EquippedItems[i]);
+                            break;
+                        }
+                    }
                     EquippedItems.Add(item);
                 }
                 else

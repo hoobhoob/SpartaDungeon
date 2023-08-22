@@ -27,16 +27,37 @@ namespace SpartaDungeon
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[아이템 목록]\n");
-
+            int y = 5;
             foreach (Item item in player.EquippedItems)
             {
-                Console.WriteLine($"- [E] {item.Name, -15} | {item.Stats.ToString(), -30} | {item.Info}");
+                Console.Write($"- [E] {item.Name}");
+                Console.SetCursorPosition(20, y);
+                Console.Write(" | " + item.Stats.ToString());
+                Console.SetCursorPosition(50, y);
+                Console.WriteLine(" | " + item.Info);
+                y++;
+
             }
             foreach (Item item in player.Invertory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {
-                    Console.WriteLine($"-    {item.Name, -15} | {item.Stats.ToString(), -30} | {item.Info}");
+                    Console.Write($"-     {item.Name}");
+                    Console.SetCursorPosition(20, y);
+                    Console.Write(" | " + item.Stats.ToString());
+                    Console.SetCursorPosition(50, y);
+                    Console.WriteLine(" | " + item.Info);
+                    y++;
+                    //int oldY= y;
+                    //Console.Write($"-     {item.Name}");
+                    //Console.SetCursorPosition(20, y);
+                    //if
+                    //{
+
+                    //}
+                    //Console.SetCursorPosition(50, oldY);
+                    //Console.Write(" | " + item.Info);
+
                 }
             }
         }

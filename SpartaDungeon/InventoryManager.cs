@@ -9,14 +9,14 @@ namespace SpartaDungeon
     internal class InventoryManager : DisplayGame
     {
         private Character player;
-        private List<string> _equipItems;
+        private List<Item> _equipItems;
 
         public InventoryManager(Character player)
         {
             buttons = new string[] { "InventoryScene" , "InventoryManager" };
             buttonsName = new string[] { "나가기" };
             this.player = player;
-            _equipItems = new List<string>();
+            _equipItems = new List<Item>();
         }
 
         public override void DisplayTitle()
@@ -29,20 +29,31 @@ namespace SpartaDungeon
         {
             Console.WriteLine($"\n[아이템 목록]\n");
             int i = 1;
+            int y = 5;
             _equipItems.Clear();
             foreach (Item item in player.EquippedItems)
             {
-                Console.WriteLine($"- {i,2} [E] {item.Name,-15} | {item.Stats.ToString(),-30} | {item.Info}");
+                Console.Write($"- {i,2} [E] {item.Name}");
+                Console.SetCursorPosition(23, y);
+                Console.Write(" | " + item.Stats.ToString());
+                Console.SetCursorPosition(53, y);
+                Console.WriteLine(" | " + item.Info);
+                y++;
                 i++;
-                _equipItems.Add(item.Code);
+                _equipItems.Add(item);
             }
             foreach (Item item in player.Invertory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {
-                    Console.WriteLine($"- {i,2}    {item.Name,-15} | {item.Stats.ToString(),-30} | {item.Info}");
+                    Console.Write($"- {i,2}     {item.Name}");
+                    Console.SetCursorPosition(23, y);
+                    Console.Write(" | " + item.Stats.ToString());
+                    Console.SetCursorPosition(53, y);
+                    Console.WriteLine(" | " + item.Info);
+                    y++;
                     i++;
-                    _equipItems.Add(item.Code);
+                    _equipItems.Add(item);
                 }
             }
         }
@@ -63,6 +74,7 @@ namespace SpartaDungeon
                     }
                     else if (number <= _equipItems.Count)
                     {
+                        player.EquipItem(_equipItems[number - 1]);
                         return buttons[1];
                     }
                 }

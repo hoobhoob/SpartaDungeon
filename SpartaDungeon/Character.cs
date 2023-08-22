@@ -41,6 +41,10 @@ namespace SpartaDungeon
                 {
                     EquippedItems.Add(item);
                 }
+                else
+                {
+                    UnEquipItem(item);
+                }
             }
         }
 

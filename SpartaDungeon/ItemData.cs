@@ -33,32 +33,6 @@ namespace SpartaDungeon
         public int Def { get; set; }
         public int HP { get; set; }
 
-        public override string ToString()
-        {
-            string stats = "";
-            if (this.Atk != 0)
-            {
-                if (this.Atk > 0)
-                    stats += $"공격력 +{this.Atk} ";
-                else
-                    stats += $"공격력 {this.Atk} ";
-            }
-            if (this.Def != 0)
-            {
-                if (this.Def > 0)
-                    stats += $"방어력 +{this.Def} ";
-                else
-                    stats += $"방어력 {this.Def} ";
-            }
-            if (this.HP != 0)
-            {
-                if (this.HP > 0)
-                    stats += $"체  력 +{this.HP} ";
-                else
-                    stats += $"체  력 {this.HP} ";
-            }
-            return stats;
-        }
     }
 
     internal class ItemData

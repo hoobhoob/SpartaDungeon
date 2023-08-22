@@ -20,6 +20,11 @@ namespace SpartaDungeon
         public string Type { get; set; }
         public ItemStats Stats { get; set; }
 
+        public int Price()
+        {
+            return Stats.Atk * 200 + Stats.Def * 200 + Stats.HP * 20;
+        }
+
         public override string ToString()
         {
             var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), WriteIndented = true };

@@ -37,31 +37,32 @@ namespace SpartaDungeon
 
     internal class ItemData
     {
-
-        public static JArray? jsonItemArray;
+        public static List<Item>? allItemList;
 
         public ItemData()
         {
-            jsonItemArray = JArray.Parse(File.ReadAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json"));
+            JArray jsonItemArray = JArray.Parse(File.ReadAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json"));
+            allItemList = new List<Item>();
+            foreach (JObject itemData in jsonItemArray)
+            {
+                Item item = new Item();
+                item.Code = itemData["Code"].ToString();
+                item.Name = itemData["Name"].ToString();
+                item.Info = itemData["Info"].ToString();
+                item.Type = itemData["Type"].ToString();
+                item.Stats = new ItemStats() { Atk = (int)itemData["Stats"]["Atk"], Def = (int)itemData["Stats"]["Def"], HP = (int)itemData["Stats"]["HP"] };
+                allItemList.Add(item);
+            }
         }
 
         public Item GetItemFromCode(String code)
         {
-            Item item = new Item();
-            foreach (JObject itemData in jsonItemArray)
+            foreach(Item item in allItemList)
             {
-                string codeInJson = itemData["Code"].ToString();
-                if (codeInJson == code)
-                {
-                    item.Code = itemData["Code"].ToString();
-                    item.Name = itemData["Name"].ToString();
-                    item.Info = itemData["Info"].ToString();
-                    item.Type = itemData["Type"].ToString();
-                    item.Stats = new ItemStats() { Atk = (int)itemData["Stats"]["Atk"], Def = (int)itemData["Stats"]["Def"], HP = (int)itemData["Stats"]["HP"] };
-                    break;
-                }
+                if (item.Code == code)
+                    return item;
             }
-            return item;
+            return new Item();
         }
     }
 }

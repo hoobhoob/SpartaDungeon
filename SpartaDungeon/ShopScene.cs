@@ -3,14 +3,13 @@ namespace SpartaDungeon
 {
     internal class ShopScene : DisplayGame
     {
-        private Character _player;
         private List<Item> _items;
 
         public ShopScene(Character player)
         {
             buttons = new string[] { "StartScene", "ShopBuyScene", "ShopSellScene" };
             buttonsName = new string[] { "나가기", "아이템 구매", "아이템 판매" };
-            this._player = player;
+            this.player = player;
             _items = ItemData.allItemList;
             //_items.RemoveAt(0);
         }
@@ -25,7 +24,7 @@ namespace SpartaDungeon
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[보유 골드]");
-            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            fontColorChange.Write(ConsoleColor.Yellow, $"{player.Gold}");
             Console.WriteLine(" G");
             Console.WriteLine("\n[아이템 목록]\n");
             int x = 25;
@@ -64,7 +63,7 @@ namespace SpartaDungeon
                     Console.WriteLine(" | ");
                 }
                 Console.SetCursorPosition(x + 20, oldY);
-                if (_player.Invertory.Contains(item))
+                if (player.Invertory.Contains(item))
                 {
                     Console.Write(" | ");
                     fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");

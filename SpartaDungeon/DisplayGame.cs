@@ -7,6 +7,7 @@ namespace SpartaDungeon
         public string[]? buttons;
         public string[]? buttonsName;
         protected FontColorChange fontColorChange = new FontColorChange();
+        protected Character player;
 
         public abstract void DisplayTitle();
 

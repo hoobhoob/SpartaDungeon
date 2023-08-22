@@ -3,14 +3,13 @@ namespace SpartaDungeon
 {
     internal class ShopBuyScene : DisplayGame
     {
-        private Character _player;
         private List<Item> _items;
 
         public ShopBuyScene(Character player)
         {
             buttons = new string[] { "ShopScene", "ShopBuyScene" };
             buttonsName = new string[] { "나가기" };
-            this._player = player;
+            this.player = player;
             _items = ItemData.allItemList;
             //_items.RemoveAt(0);
         }
@@ -25,7 +24,7 @@ namespace SpartaDungeon
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[보유 골드]");
-            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            fontColorChange.Write(ConsoleColor.Yellow, $"{player.Gold}");
             Console.WriteLine(" G");
             Console.WriteLine($"\n[아이템 목록]\n");
             int i = 1;
@@ -67,7 +66,7 @@ namespace SpartaDungeon
                     Console.WriteLine(" | ");
                 }
                 Console.SetCursorPosition(x + 20, oldY);
-                if (_player.Invertory.Contains(item))
+                if (player.Invertory.Contains(item))
                 {
                     Console.Write(" | ");
                     fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");
@@ -101,19 +100,19 @@ namespace SpartaDungeon
                     }
                     else if (number <= _items.Count)
                     {
-                        if (_player.Invertory.Contains(_items[number - 1]))
+                        if (player.Invertory.Contains(_items[number - 1]))
                         {
                             errNumber = 1;
                         }
                         else
                         {
-                            if(_items[number - 1].Price() > _player.Gold)
+                            if(_items[number - 1].Price() > player.Gold)
                             {
                                 errNumber = 2;
                             }
                             else
                             {
-                                _player.BuyItem(_items[number - 1]);
+                                player.BuyItem(_items[number - 1]);
                                 return buttons[1];
                             }
                         }

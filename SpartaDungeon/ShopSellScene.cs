@@ -3,7 +3,6 @@ namespace SpartaDungeon
 {
     internal class ShopSellScene : DisplayGame
     {
-        private Character _player;
         private List<Item> _items;
         private float _discountPercentage;
 
@@ -11,8 +10,8 @@ namespace SpartaDungeon
         {
             buttons = new string[] { "ShopScene", "ShopSellScene" };
             buttonsName = new string[] { "나가기" };
-            this._player = player;
-            _items = _player.Invertory;
+            this.player = player;
+            _items = player.Invertory;
             _discountPercentage = 0.85f;
         }
         public override void DisplayTitle()
@@ -26,13 +25,13 @@ namespace SpartaDungeon
         public override void DisplayMain()
         {
             Console.WriteLine($"\n[보유 골드]");
-            fontColorChange.Write(ConsoleColor.Yellow, $"{_player.Gold}");
+            fontColorChange.Write(ConsoleColor.Yellow, $"{player.Gold}");
             Console.WriteLine(" G");
             Console.WriteLine($"\n[아이템 목록]\n");
             int i = 1;
             int x = 25;
             int y = 11;
-            foreach (Item item in _player.EquippedItems)
+            foreach (Item item in player.EquippedItems)
             {
                 int count = 0;
                 int oldY = y;
@@ -75,9 +74,9 @@ namespace SpartaDungeon
                 y += count;
                 i++;
             }
-            foreach (Item item in _player.Invertory)
+            foreach (Item item in player.Invertory)
             {
-                if (!_player.EquippedItems.Contains(item))
+                if (!player.EquippedItems.Contains(item))
                 {
                     int count = 0;
                     int oldY = y;
@@ -138,7 +137,7 @@ namespace SpartaDungeon
                     }
                     else if (number <= _items.Count)
                     {
-                        _player.SellItem(_items[number - 1], (int)(_items[number - 1].Price() * _discountPercentage));
+                        player.SellItem(_items[number - 1], (int)(_items[number - 1].Price() * _discountPercentage));
                         return buttons[1];
                     }
                 }

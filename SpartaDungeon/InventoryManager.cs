@@ -3,14 +3,13 @@ namespace SpartaDungeon
 {
     internal class InventoryManager : DisplayGame
     {
-        private Character _player;
         private List<Item> _equipItems;
 
         public InventoryManager(Character player)
         {
             buttons = new string[] { "InventoryScene" , "InventoryManager" };
             buttonsName = new string[] { "나가기" };
-            this._player = player;
+            this.player = player;
             _equipItems = new List<Item>();
         }
 
@@ -29,7 +28,7 @@ namespace SpartaDungeon
             int x = 25;
             int y = 8;
             _equipItems.Clear();
-            foreach (Item item in _player.EquippedItems)
+            foreach (Item item in player.EquippedItems)
             {
                 int count = 0;
                 Console.Write("- ");
@@ -68,9 +67,9 @@ namespace SpartaDungeon
                 i++;
                 _equipItems.Add(item);
             }
-            foreach (Item item in _player.Invertory)
+            foreach (Item item in player.Invertory)
             {
-                if (!_player.EquippedItems.Contains(item))
+                if (!player.EquippedItems.Contains(item))
                 {
                     int count = 0;
                     Console.Write("- ");
@@ -127,7 +126,7 @@ namespace SpartaDungeon
                     }
                     else if (number <= _equipItems.Count)
                     {
-                        _player.EquipItem(_equipItems[number - 1]);
+                        player.EquipItem(_equipItems[number - 1]);
                         return buttons[1];
                     }
                 }

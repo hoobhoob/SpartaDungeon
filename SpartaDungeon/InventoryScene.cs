@@ -3,13 +3,11 @@ namespace SpartaDungeon
 {
     internal class InventoryScene : DisplayGame
     {
-        private Character _player;
-
         public InventoryScene(Character player)
         {
             buttons = new string[] { "StartScene", "InventoryManager" };
             buttonsName = new string[] { "나가기", "장착 관리" };
-            this._player = player;
+            this.player = player;
         }
 
         public override void DisplayTitle()
@@ -23,7 +21,7 @@ namespace SpartaDungeon
             Console.WriteLine("\n[아이템 목록]\n");
             int x = 25;
             int y = 8;
-            foreach (Item item in _player.EquippedItems)
+            foreach (Item item in player.EquippedItems)
             {
                 int count = 0;
                 Console.Write($"- ");
@@ -59,9 +57,9 @@ namespace SpartaDungeon
                 }
                 y += count;
             }
-            foreach (Item item in _player.Invertory)
+            foreach (Item item in player.Invertory)
             {
-                if (!_player.EquippedItems.Contains(item))
+                if (!player.EquippedItems.Contains(item))
                 {
                     int count = 0;
                     Console.Write($"-     {item.Name}");

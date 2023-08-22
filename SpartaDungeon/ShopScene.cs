@@ -31,7 +31,7 @@ namespace SpartaDungeon
             Console.WriteLine($"\n[보유 골드]");
             Console.WriteLine($"{_player.Gold} G");
             Console.WriteLine($"\n[아이템 목록]\n");
-
+            int x = 25;
             int y = 8;
             foreach (Item item in _items)
             {
@@ -39,36 +39,43 @@ namespace SpartaDungeon
                 int itemPrice = 0;
                 int oldY = y;
                 Console.Write($"-  {item.Name}");
-                Console.SetCursorPosition(55, y);
+                Console.SetCursorPosition(x + 35, y);
                 Console.Write($" | {item.Info}");
                 if (item.Stats.Atk != 0)
                 {
-                    Console.SetCursorPosition(20, y);
+                    Console.SetCursorPosition(x, y);
                     Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
                     count++;
                     itemPrice += item.Stats.Atk * 200;
                 }
                 if (item.Stats.Def != 0)
                 {
-                    Console.SetCursorPosition(20, y + count);
+                    Console.SetCursorPosition(x, y + count);
                     Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
                     count++;
                     itemPrice += item.Stats.Def * 200;
                 }
                 if (item.Stats.HP != 0)
                 {
-                    Console.SetCursorPosition(20, y + count);
+                    Console.SetCursorPosition(x, y + count);
                     Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
                     count++;
                     itemPrice += item.Stats.HP * 20;
                 }
                 if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
                 {
-                    Console.SetCursorPosition(20, y);
+                    Console.SetCursorPosition(x, y);
                     Console.WriteLine(" | ");
                 }
-                Console.SetCursorPosition(40, oldY);
-                Console.WriteLine($" | {itemPrice} G");
+                Console.SetCursorPosition(x + 20, oldY);
+                if (_player.Invertory.Contains(item))
+                {
+                    Console.WriteLine($" | 구매완료");
+                }
+                else
+                {
+                    Console.WriteLine($" | {itemPrice} G");
+                }
                 y += count;
                 Console.SetCursorPosition(0, y);
 

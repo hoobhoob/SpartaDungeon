@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Text.Json;
-
+﻿
 namespace SpartaDungeon
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
             ItemData itemData = new ItemData();
@@ -22,6 +18,7 @@ namespace SpartaDungeon
             ShopSellScene shopSellScene = new ShopSellScene(player);
             string sceneChoice = "StartScene";
             bool isGameOver = false;
+
 
             //JObject job2 = JObject.Parse(jsonString);
 

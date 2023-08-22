@@ -1,7 +1,4 @@
 ﻿
-using System.Reflection.Metadata;
-using System.Security.Cryptography;
-
 namespace SpartaDungeon
 {
     public class Character

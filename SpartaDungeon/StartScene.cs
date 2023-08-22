@@ -11,8 +11,8 @@ namespace SpartaDungeon
 
         public StartScene()
         {
-            buttons = new string[] { "Escape", "StatusScene", "InventoryScene" };
-            buttonsName = new string[] { "나가기", "상태 보기", "인벤토리" };
+            buttons = new string[] { "Escape", "StatusScene", "InventoryScene", "ShopScene" };
+            buttonsName = new string[] { "나가기", "상태 보기", "인벤토리", "상점" };
         }
 
         public override void DisplayTitle()

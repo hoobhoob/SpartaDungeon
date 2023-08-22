@@ -13,7 +13,7 @@ namespace SpartaDungeon
             StartScene startScene = new StartScene();
             List<Item> playerInventory = new List<Item> { itemData.GetItemFromCode("0"), itemData.GetItemFromCode("1"), itemData.GetItemFromCode("2") };
             List<Item> playerEquipped = new List<Item> { itemData.GetItemFromCode("1") };
-            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 150000, playerInventory, playerEquipped);
+            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 150000000, playerInventory, playerEquipped);
             StatusScene statusScene = new StatusScene(player);
             InventoryScene inventoryScene = new InventoryScene(player);
             InventoryManager inventoryManager = new InventoryManager(player);

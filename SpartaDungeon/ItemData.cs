@@ -37,7 +37,7 @@ namespace SpartaDungeon
 
     internal class ItemData
     {
-        public static List<Item>? allItemList;
+        public static List<Item> allItemList;
 
         public ItemData()
         {

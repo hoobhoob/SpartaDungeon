@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace SpartaDungeon
 {
-    internal class ShopBuyScene : DisplayGame
+    internal class ShopSellScene : DisplayGame
     {
         private Character _player;
         private List<Item> _items;
+        private float _discountPercentage;
 
-        public ShopBuyScene(Character player)
+        public ShopSellScene(Character player)
         {
-            buttons = new string[] { "ShopScene", "ShopBuyScene" };
+            buttons = new string[] { "ShopScene", "ShopSellScene" };
             buttonsName = new string[] { "나가기" };
             this._player = player;
-            _items = ItemData.allItemList;
-            //_items.RemoveAt(0);
+            _items = _player.Invertory;
+            _discountPercentage = 0.85f;
         }
         public override void DisplayTitle()
         {
-            Console.WriteLine("상점 - 아이템 구매");
+            Console.WriteLine("상점 - 아이템 판매");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
         }
@@ -34,11 +35,11 @@ namespace SpartaDungeon
             int i = 1;
             int x = 25;
             int y = 8;
-            foreach (Item item in _items)
+            foreach (Item item in _player.EquippedItems)
             {
                 int count = 0;
                 int oldY = y;
-                Console.Write($"- {i,2}  {item.Name}");
+                Console.Write($"- {i,2} [E] {item.Name}");
                 Console.SetCursorPosition(x + 35, y);
                 Console.Write($" | {item.Info}");
                 if (item.Stats.Atk != 0)
@@ -65,17 +66,47 @@ namespace SpartaDungeon
                     Console.WriteLine(" | ");
                 }
                 Console.SetCursorPosition(x + 20, oldY);
-                if (_player.Invertory.Contains(item))
-                {
-                    Console.WriteLine($" | 구매완료");
-                }
-                else
-                {
-                    Console.WriteLine($" | {item.Price()} G");
-                }
-                i++;
+                Console.WriteLine($" | {(int)(item.Price() * _discountPercentage)} G");
                 y += count;
-                Console.SetCursorPosition(0, y);
+                i++;
+            }
+            foreach (Item item in _player.Invertory)
+            {
+                if (!_player.EquippedItems.Contains(item))
+                {
+                    int count = 0;
+                    int oldY = y;
+                    Console.Write($"- {i,2}     {item.Name}");
+                    Console.SetCursorPosition(x + 35, y);
+                    Console.Write($" | {item.Info}");
+                    if (item.Stats.Atk != 0)
+                    {
+                        Console.SetCursorPosition(x, y);
+                        Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if (item.Stats.Def != 0)
+                    {
+                        Console.SetCursorPosition(x, y + count);
+                        Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if (item.Stats.HP != 0)
+                    {
+                        Console.SetCursorPosition(x, y + count);
+                        Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
+                        count++;
+                    }
+                    if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
+                    {
+                        Console.SetCursorPosition(x, y);
+                        Console.WriteLine(" | ");
+                    }
+                    Console.SetCursorPosition(x + 20, oldY);
+                    Console.WriteLine($" | {(int)(item.Price() * _discountPercentage)} G");
+                    y += count;
+                    i++;
+                }
             }
         }
 
@@ -84,7 +115,6 @@ namespace SpartaDungeon
             Console.WriteLine();
             while (buttons != null)
             {
-                int errNumber = 0;
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">>  ");
                 string? choice = Console.ReadLine();
@@ -96,39 +126,11 @@ namespace SpartaDungeon
                     }
                     else if (number <= _items.Count)
                     {
-                        if (_player.Invertory.Contains(_items[number - 1]))
-                        {
-                            errNumber = 1;
-                        }
-                        else
-                        {
-                            if(_items[number - 1].Price() > _player.Gold)
-                            {
-                                errNumber = 2;
-                            }
-                            else
-                            {
-                                _player.BuyItem(_items[number - 1]);
-                                return buttons[1];
-                            }
-                        }
+                        _player.SellItem(_items[number - 1], (int)(_items[number - 1].Price() * _discountPercentage));
+                        return buttons[1];
                     }
                 }
-                switch (errNumber)
-                {
-                    case 0:
-                        Console.WriteLine("\n잘못된 입력입니다.\n");
-                        break;
-                    case 1:
-                        Console.WriteLine("\n이미 구매한 아이템입니다.\n");
-                        break;
-                    case 2:
-                        Console.WriteLine("\nGold 가 부족합니다.\n");
-                        break;
-                    default:
-                        Console.WriteLine("\n잘못된 입력입니다.\n");
-                        break;
-                }
+                Console.WriteLine("\n잘못된 입력입니다.\n");
             }
             return "StartScene";
         }

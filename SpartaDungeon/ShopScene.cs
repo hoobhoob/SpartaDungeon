@@ -19,6 +19,7 @@ namespace SpartaDungeon
             _items = ItemData.allItemList;
             //_items.RemoveAt(0);
         }
+
         public override void DisplayTitle()
         {
             Console.WriteLine("상점");
@@ -74,7 +75,6 @@ namespace SpartaDungeon
                 }
                 y += count;
                 Console.SetCursorPosition(0, y);
-
             }
         }
     }

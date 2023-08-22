@@ -29,7 +29,6 @@ namespace SpartaDungeon
             {
                 Console.WriteLine("선택지가 없다.");
             }
-
         }
 
         public string DIsplayReadNumber()

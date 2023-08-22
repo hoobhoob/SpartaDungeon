@@ -73,10 +73,24 @@ namespace SpartaDungeon
             }
         }
 
+        public void SellItem(Item item, int gold)
+        {
+            if (Invertory.Contains(item))
+            {
+                if (EquippedItems.Contains(item))
+                {
+                    EquippedItems.Remove(item);
+                }
+                Invertory.Remove(item);
+                Gold += gold;
+            }
+        }
+
         public void LevelUp()
         {
             Level++;
         }
+
         public void GetEquippedItemsStats(out int totalatk, out int totaldef, out int totalhp)
         {
             totalatk = 0;

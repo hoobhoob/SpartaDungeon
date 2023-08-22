@@ -16,6 +16,7 @@ namespace SpartaDungeon
             ShopScene shopScene = new ShopScene(player);
             ShopBuyScene shopBuyScene = new ShopBuyScene(player);
             ShopSellScene shopSellScene = new ShopSellScene(player);
+            DungeonEntrance dungeonEntrance = new DungeonEntrance(player);
             string sceneChoice = "StartScene";
             bool isGameOver = false;
 
@@ -49,6 +50,9 @@ namespace SpartaDungeon
                         break;
                     case "ShopSellScene":
                         sceneChoice = shopSellScene.Display();
+                        break;
+                    case "DungeonEntrance":
+                        sceneChoice = dungeonEntrance.Display();
                         break;
                     case "Escape":
                         isGameOver = true;

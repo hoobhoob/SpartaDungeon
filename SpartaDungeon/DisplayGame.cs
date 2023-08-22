@@ -18,11 +18,13 @@ namespace SpartaDungeon
             Console.WriteLine();
             if (buttonsName != null && buttonsName.Length > 0)
             {
-                for (int i = 0; i < buttonsName.Length; i++)
+                for (int i = 1; i < buttonsName.Length; i++)
                 {
                     fontColorChange.Write(ConsoleColor.Magenta, $"{i}");
                     Console.WriteLine($". {buttonsName[i]}");
                 }
+                fontColorChange.Write(ConsoleColor.Magenta, $"0");
+                Console.WriteLine($". {buttonsName[0]}");
             }
             else
             {

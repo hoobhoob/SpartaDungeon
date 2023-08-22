@@ -18,7 +18,6 @@ namespace SpartaDungeon
         {
             fontColorChange.WriteLine(ConsoleColor.Cyan, "\n상점");
             Console.WriteLine("\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
-
         }
 
         public override void DisplayMain()

@@ -37,7 +37,6 @@ namespace SpartaDungeon
             foreach (Item item in _items)
             {
                 int count = 0;
-                int itemPrice = 0;
                 int oldY = y;
                 Console.Write($"- {i,2}  {item.Name}");
                 Console.SetCursorPosition(x + 35, y);
@@ -47,21 +46,18 @@ namespace SpartaDungeon
                     Console.SetCursorPosition(x, y);
                     Console.WriteLine($" | 공격력 {item.Stats.Atk.ToString("+#;-#")}");
                     count++;
-                    itemPrice += item.Stats.Atk * 200;
                 }
                 if (item.Stats.Def != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
                     Console.WriteLine($" | 방어력 {item.Stats.Def.ToString("+#;-#")}");
                     count++;
-                    itemPrice += item.Stats.Def * 200;
                 }
                 if (item.Stats.HP != 0)
                 {
                     Console.SetCursorPosition(x, y + count);
                     Console.WriteLine($" | 체  력 {item.Stats.HP.ToString("+#;-#")}");
                     count++;
-                    itemPrice += item.Stats.HP * 20;
                 }
                 if (item.Stats.Atk == 0 && item.Stats.Def == 0 && item.Stats.HP == 0)
                 {
@@ -75,7 +71,7 @@ namespace SpartaDungeon
                 }
                 else
                 {
-                    Console.WriteLine($" | {itemPrice} G");
+                    Console.WriteLine($" | {item.Price()} G");
                 }
                 i++;
                 y += count;
@@ -89,6 +85,7 @@ namespace SpartaDungeon
             Console.WriteLine();
             while (buttons != null)
             {
+                int errNumber = 0;
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">>  ");
                 string? choice = Console.ReadLine();
@@ -102,17 +99,37 @@ namespace SpartaDungeon
                     {
                         if (_player.Invertory.Contains(_items[number - 1]))
                         {
-                            Console.WriteLine("\n이미 구매한 아이템입니다.\n");
+                            errNumber = 1;
                         }
-                        //else
-                        //{
-                        //    if 
-                        //}
-                        //_player.EquipItem(_items[number - 1]);
-                        return buttons[1];
+                        else
+                        {
+                            if(_items[number - 1].Price() > _player.Gold)
+                            {
+                                errNumber = 2;
+                            }
+                            else
+                            {
+                                _player.BuyItem(_items[number - 1]);
+                                return buttons[1];
+                            }
+                        }
                     }
                 }
-                Console.WriteLine("잘못된 입력입니다.");
+                switch (errNumber)
+                {
+                    case 0:
+                        Console.WriteLine("\n잘못된 입력입니다.\n");
+                        break;
+                    case 1:
+                        Console.WriteLine("\n이미 구매한 아이템입니다.\n");
+                        break;
+                    case 2:
+                        Console.WriteLine("\nGold 가 부족합니다.\n");
+                        break;
+                    default:
+                        Console.WriteLine("\n잘못된 입력입니다.\n");
+                        break;
+                }
             }
             return "StartScene";
         }

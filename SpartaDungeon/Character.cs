@@ -8,11 +8,11 @@ namespace SpartaDungeon
     {
         public string Name { get; }
         public string Job { get; }
-        public int Level { get; }
-        public int Atk { get; }
-        public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; }
+        public int Level { get; set; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
+        public int Hp { get; set; }
+        public int Gold { get; set; }
         public List<Item> Invertory { get; }
         public List<Item> EquippedItems { get; }
         public Character(string name, string job, int level, int atk, int def, int hp, int gold, List<Item> inventory, List<Item> equippedItems)
@@ -64,6 +64,19 @@ namespace SpartaDungeon
             }
         }
 
+        public void BuyItem(Item item)
+        {
+            if (!Invertory.Contains(item))
+            {
+                Invertory.Add(item);
+                Gold -= item.Price();
+            }
+        }
+
+        public void LevelUp()
+        {
+            Level++;
+        }
         public void GetEquippedItemsStats(out int totalatk, out int totaldef, out int totalhp)
         {
             totalatk = 0;

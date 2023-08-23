@@ -13,7 +13,7 @@ namespace SpartaDungeon
                                                            new Dungeon("일반 던전", 11, 1700),
                                                            new Dungeon("어려운 던전", 17, 2500)
                                                           };
-            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 1500, playerInventory, playerEquipped);
+            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 1500, 0, playerInventory, playerEquipped);
             StatusScene statusScene = new StatusScene(player);
             InventoryScene inventoryScene = new InventoryScene(player);
             InventoryManager inventoryManager = new InventoryManager(player);
@@ -26,12 +26,7 @@ namespace SpartaDungeon
             string sceneChoice = "StartScene";
             bool isGameOver = false;
             int dungeonSelectNum = -1;
-
-            //JObject job2 = JObject.Parse(jsonString);
-
-            //JArray jsonArray = new JArray() { job1, job2 };
-            //File.WriteAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json", jsonArray.ToString());
-
+;
             while (!isGameOver)
             {
                 switch (sceneChoice)

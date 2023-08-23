@@ -13,7 +13,7 @@ namespace SpartaDungeon
         public int DungeonClearCount { get; set; }
         public List<Item> Invertory { get; }
         public List<Item> EquippedItems { get; }
-        public Character(string name, string job, int level, int atk, int def, int hp, int gold, List<Item> inventory, List<Item> equippedItems)
+        public Character(string name, string job, int level, int atk, int def, int hp, int gold, int dungeonClearCount, List<Item> inventory, List<Item> equippedItems)
         {
             Name = name;
             Job = job;
@@ -22,7 +22,7 @@ namespace SpartaDungeon
             Def = def;
             Hp = hp;
             Gold = gold;
-            DungeonClearCount = 0;
+            DungeonClearCount = dungeonClearCount;
             Invertory = inventory;
             EquippedItems = equippedItems;
         }

@@ -9,6 +9,7 @@ namespace SpartaDungeon
     internal class DungeonResult : DisplayGame
     {
         private List<Dungeon> _dungeons;
+        private int _playerOldLevel;
         private int _playerOldHP;
         private int _playerOldGold;
         private int _dungeonSelectNum;
@@ -19,6 +20,7 @@ namespace SpartaDungeon
             buttonsName = new string[] { "나가기" };
             this.player = player;
             _dungeons = dungeons;
+            _playerOldLevel = player.Level;
             _playerOldHP = player.Hp;
             _playerOldGold = player.Gold;
             _dungeonSelectNum = -1;
@@ -53,13 +55,21 @@ namespace SpartaDungeon
             fontColorChange.Write(ConsoleColor.Yellow, $"{_playerOldGold}");
             Console.Write(" -> ");
             fontColorChange.WriteLine(ConsoleColor.Green, $"{player.Gold}");
-            _playerOldHP = player.Hp;
-            _playerOldGold = player.Gold;
+            if (_playerOldLevel != player.Level)
+            {
+                Console.Write("Level : ");
+                fontColorChange.Write(ConsoleColor.Cyan, $"{_playerOldLevel}");
+                Console.Write(" -> ");
+                fontColorChange.WriteLine(ConsoleColor.Green, $"{player.Level}");
+            }
         }
 
         public string Display(int dungeonSelectNum)
         {
             _dungeonSelectNum = dungeonSelectNum;
+            _playerOldLevel = player.Level;
+            _playerOldHP = player.Hp;
+            _playerOldGold = player.Gold;
             _isClear = _dungeons[_dungeonSelectNum].IsClear(player);
             Console.Clear();
             DisplayTitle();

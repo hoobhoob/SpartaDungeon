@@ -13,7 +13,7 @@ namespace SpartaDungeon
                                                            new Dungeon("일반 던전", 11, 1700),
                                                            new Dungeon("어려운 던전", 17, 2500)
                                                           };
-            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 150000000, playerInventory, playerEquipped);
+            Character player = new Character("Chad", "전사", 1, 10, 5, 100, 1500, playerInventory, playerEquipped);
             StatusScene statusScene = new StatusScene(player);
             InventoryScene inventoryScene = new InventoryScene(player);
             InventoryManager inventoryManager = new InventoryManager(player);

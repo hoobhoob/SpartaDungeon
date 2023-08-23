@@ -7,7 +7,30 @@
   "Hp": 100,
   "Gold": 1500,
   "DungeonClearCount": 0,
-  "Inventory": null,
+  "Inventory": [
+    {
+      "Code": "1",
+      "Name": "낡은 검",
+      "Info": "쉽게 볼 수 있는 낡은 검입니다.",
+      "Type": "Weapon",
+      "Stats": {
+        "Atk": 2,
+        "Def": 0,
+        "HP": 0
+      }
+    },
+    {
+      "Code": "2",
+      "Name": "수련자 갑옷",
+      "Info": "수련에 도움을 주는 갑옷입니다.",
+      "Type": "Armor",
+      "Stats": {
+        "Atk": 0,
+        "Def": 5,
+        "HP": 0
+      }
+    }
+  ],
   "EquippedItems": [
     {
       "Code": "1",

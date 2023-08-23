@@ -7,7 +7,7 @@
   "Hp": 100,
   "Gold": 1500,
   "DungeonClearCount": 0,
-  "Invertory": [
+  "Inventory": [
     {
       "Code": "1",
       "Name": "낡은 검",

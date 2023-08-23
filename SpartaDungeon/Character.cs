@@ -10,6 +10,7 @@ namespace SpartaDungeon
         public int Def { get; set; }
         public int Hp { get; set; }
         public int Gold { get; set; }
+        public int DungeonClearCount { get; set; }
         public List<Item> Invertory { get; }
         public List<Item> EquippedItems { get; }
         public Character(string name, string job, int level, int atk, int def, int hp, int gold, List<Item> inventory, List<Item> equippedItems)
@@ -21,6 +22,7 @@ namespace SpartaDungeon
             Def = def;
             Hp = hp;
             Gold = gold;
+            DungeonClearCount = 0;
             Invertory = inventory;
             EquippedItems = equippedItems;
         }

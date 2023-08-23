@@ -43,6 +43,17 @@ namespace SpartaDungeon
                     player.Hp -= totalHpCost;
                 }
                 player.Gold += Reward * rewardPercentage / 100;
+
+                player.DungeonClearCount++;
+                int totalCount = 0;
+                for (int i = 1; i <= player.Level; i++)
+                {
+                    totalCount += i;
+                }
+                if (player.DungeonClearCount >= totalCount)
+                {
+                    player.LevelUp();
+                }
                 return true;
             }
         }

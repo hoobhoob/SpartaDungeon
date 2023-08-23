@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Numerics;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -20,8 +22,7 @@ namespace SpartaDungeon
 
         public override string ToString()
         {
-            var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(this, options);
+            string jsonString = JsonConvert.SerializeObject(this);
             return jsonString;
         }
     }
@@ -39,18 +40,8 @@ namespace SpartaDungeon
 
         public ItemData()
         {
-            JArray jsonItemArray = JArray.Parse(File.ReadAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json"));
-            allItemList = new List<Item>();
-            foreach (JObject itemData in jsonItemArray)
-            {
-                Item item = new Item();
-                item.Code = itemData["Code"].ToString();
-                item.Name = itemData["Name"].ToString();
-                item.Info = itemData["Info"].ToString();
-                item.Type = itemData["Type"].ToString();
-                item.Stats = new ItemStats() { Atk = (int)itemData["Stats"]["Atk"], Def = (int)itemData["Stats"]["Def"], HP = (int)itemData["Stats"]["HP"] };
-                allItemList.Add(item);
-            }
+            string jsonString = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\ItemData.json");
+            allItemList = JsonConvert.DeserializeObject<List<Item>>(jsonString);
         }
 
         public Item GetItemFromCode(String code)

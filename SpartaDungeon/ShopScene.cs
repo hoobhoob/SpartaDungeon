@@ -62,7 +62,7 @@ namespace SpartaDungeon
                     Console.WriteLine(" | ");
                 }
                 Console.SetCursorPosition(x + 20, oldY);
-                if (player.Invertory.Contains(item))
+                if (player.Inventory.Contains(item))
                 {
                     Console.Write(" | ");
                     fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");

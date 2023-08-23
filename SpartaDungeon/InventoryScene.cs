@@ -57,7 +57,7 @@ namespace SpartaDungeon
                 }
                 y += count;
             }
-            foreach (Item item in player.Invertory)
+            foreach (Item item in player.Inventory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {

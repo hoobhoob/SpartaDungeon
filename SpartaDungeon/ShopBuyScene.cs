@@ -66,7 +66,7 @@ namespace SpartaDungeon
                     Console.WriteLine(" | ");
                 }
                 Console.SetCursorPosition(x + 20, oldY);
-                if (player.Invertory.Contains(item))
+                if (player.Inventory.Contains(item))
                 {
                     Console.Write(" | ");
                     fontColorChange.WriteLine(ConsoleColor.Red, "구매완료");
@@ -100,7 +100,7 @@ namespace SpartaDungeon
                     }
                     else if (number <= _items.Count)
                     {
-                        if (player.Invertory.Contains(_items[number - 1]))
+                        if (player.Inventory.Contains(_items[number - 1]))
                         {
                             errNumber = 1;
                         }

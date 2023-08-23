@@ -7,7 +7,7 @@
   "Hp": 100,
   "Gold": 1500,
   "DungeonClearCount": 0,
-  "Invertory": null,
+  "Inventory": null,
   "EquippedItems": [
     {
       "Code": "1",

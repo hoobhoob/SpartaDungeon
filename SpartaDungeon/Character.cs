@@ -11,7 +11,7 @@ namespace SpartaDungeon
         public int Hp { get; set; }
         public int Gold { get; set; }
         public int DungeonClearCount { get; set; }
-        public List<Item> Invertory { get; }
+        public List<Item> Inventory { get; }
         public List<Item> EquippedItems { get; }
         public Character(string name, string job, int level, int atk, int def, int hp, int gold, int dungeonClearCount, List<Item> inventory, List<Item> equippedItems)
         {
@@ -23,15 +23,15 @@ namespace SpartaDungeon
             Hp = hp;
             Gold = gold;
             DungeonClearCount = dungeonClearCount;
-            Invertory = inventory;
+            Inventory = inventory;
             EquippedItems = equippedItems;
         }
 
         public void EquipItem(Item item)
         {
-            if (!Invertory.Contains(item))
+            if (!Inventory.Contains(item))
             {
-                Invertory.Add(item);
+                Inventory.Add(item);
                 EquippedItems.Add(item);
             }
             else
@@ -65,22 +65,22 @@ namespace SpartaDungeon
 
         public void BuyItem(Item item)
         {
-            if (!Invertory.Contains(item))
+            if (!Inventory.Contains(item))
             {
-                Invertory.Add(item);
+                Inventory.Add(item);
                 Gold -= item.Price();
             }
         }
 
         public void SellItem(Item item, int gold)
         {
-            if (Invertory.Contains(item))
+            if (Inventory.Contains(item))
             {
                 if (EquippedItems.Contains(item))
                 {
                     EquippedItems.Remove(item);
                 }
-                Invertory.Remove(item);
+                Inventory.Remove(item);
                 Gold += gold;
             }
         }

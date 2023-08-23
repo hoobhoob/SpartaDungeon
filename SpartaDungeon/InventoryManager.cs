@@ -67,7 +67,7 @@ namespace SpartaDungeon
                 i++;
                 _equipItems.Add(item);
             }
-            foreach (Item item in player.Invertory)
+            foreach (Item item in player.Inventory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {

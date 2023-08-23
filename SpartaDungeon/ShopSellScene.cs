@@ -11,7 +11,7 @@ namespace SpartaDungeon
             buttons = new string[] { "ShopScene", "ShopSellScene" };
             buttonsName = new string[] { "나가기" };
             this.player = player;
-            _items = player.Invertory;
+            _items = player.Inventory;
             _discountPercentage = 0.85f;
         }
         public override void DisplayTitle()
@@ -74,7 +74,7 @@ namespace SpartaDungeon
                 y += count;
                 i++;
             }
-            foreach (Item item in player.Invertory)
+            foreach (Item item in player.Inventory)
             {
                 if (!player.EquippedItems.Contains(item))
                 {

@@ -1,4 +1,7 @@
 ﻿
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
 namespace SpartaDungeon
 {
     internal class Program
@@ -26,48 +29,59 @@ namespace SpartaDungeon
             string sceneChoice = "StartScene";
             bool isGameOver = false;
             int dungeonSelectNum = -1;
-;
-            while (!isGameOver)
+
+            if (File.Exists($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\PlayerData.json"))
             {
-                switch (sceneChoice)
-                {
-                    case "StartScene":
-                        sceneChoice = startScene.Display();
-                        break;
-                    case "StatusScene":
-                        sceneChoice = statusScene.Display();
-                        break;
-                    case "InventoryScene":
-                        sceneChoice = inventoryScene.Display();
-                        break;
-                    case "InventoryManager":
-                        sceneChoice = inventoryManager.Display();
-                        break;
-                    case "ShopScene":
-                        sceneChoice = shopScene.Display();
-                        break;
-                    case "ShopBuyScene":
-                        sceneChoice = shopBuyScene.Display();
-                        break;
-                    case "ShopSellScene":
-                        sceneChoice = shopSellScene.Display();
-                        break;
-                    case "DungeonEntrance":
-                        sceneChoice = dungeonEntrance.Display(out dungeonSelectNum);
-                        break;
-                    case "DungeonResult":
-                        sceneChoice = dungeonResult.Display(dungeonSelectNum);
-                        break;
-                    case "RestScene":
-                        sceneChoice = restScene.Display();  
-                        break;
-                    case "Escape":
-                        isGameOver = true;
-                        break;
-                    default:
-                        break;
-                }
+                string JsonPlayerString = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\PlayerData.json");
+                Character playertemp = JsonConvert.DeserializeObject<Character>(JsonPlayerString);
+                string jsonStringtemp = JsonConvert.SerializeObject(playertemp, Formatting.Indented);
+                File.WriteAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\Temp.json", jsonStringtemp);
             }
+
+            //while (!isGameOver)
+            //{
+            //    switch (sceneChoice)
+            //    {
+            //        case "StartScene":
+            //            sceneChoice = startScene.Display();
+            //            break;
+            //        case "StatusScene":
+            //            sceneChoice = statusScene.Display();
+            //            break;
+            //        case "InventoryScene":
+            //            sceneChoice = inventoryScene.Display();
+            //            break;
+            //        case "InventoryManager":
+            //            sceneChoice = inventoryManager.Display();
+            //            break;
+            //        case "ShopScene":
+            //            sceneChoice = shopScene.Display();
+            //            break;
+            //        case "ShopBuyScene":
+            //            sceneChoice = shopBuyScene.Display();
+            //            break;
+            //        case "ShopSellScene":
+            //            sceneChoice = shopSellScene.Display();
+            //            break;
+            //        case "DungeonEntrance":
+            //            sceneChoice = dungeonEntrance.Display(out dungeonSelectNum);
+            //            break;
+            //        case "DungeonResult":
+            //            sceneChoice = dungeonResult.Display(dungeonSelectNum);
+            //            break;
+            //        case "RestScene":
+            //            sceneChoice = restScene.Display();  
+            //            break;
+            //        case "Escape":
+            //            isGameOver = true;
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
+
+            //string jsonString = JsonConvert.SerializeObject(player, Formatting.Indented);
+            //File.WriteAllText($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\PlayerData.json", jsonString);
         }
     }
 }
